@@ -10,11 +10,13 @@ app.get("/", (req, res) => {
 
 // Trigger automation
 app.get("/run", async (req, res) => {
-  try {
+   try {
     const result = await performAutomation();
+    console.log("🎉 Automation result:", result);
     res.json({ success: true, result });
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    console.error("❌ Automation failed:", err);
+    res.json({ success: false, error: err.stack || err.message });
   }
 });
 
