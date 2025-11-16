@@ -37,6 +37,8 @@ export async function performAutomation() {
   // Example: get page title
   const title = await page.title();
 
+  await page.waitForTimeout(2000);
+
   await browser.close();
   await client.sessions.release(session.id);
 
