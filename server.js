@@ -11,7 +11,12 @@ app.get("/", (req, res) => {
 // Trigger automation
 app.get("/run", async (req, res) => {
    try {
-    const result = await performAutomation();
+    // Combine query and body parameters so you can use either
+    const params = { ...req.query, ...req.body };
+    console.log("🔧 Incoming parameters:", params);
+
+    const result = await performAutomation(params);
+
     console.log("🎉 Automation result:", result);
     res.json({ success: true, result });
   } catch (err) {
